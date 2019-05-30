@@ -1,0 +1,171 @@
+1,python:
+s = set()
+s.add(1) 
+if __name__ == '__main__':
+text = "yes" if new_year else "no"
+2,flask
+flask code is generally stored inside of a file called application.py.
+
+application.py:
+(from flask import Flask
+
+app = Flask(__name__)
+
+@app.route("/")
+def index():
+	return "...")
+
+@app.route("/<string:name>")
+def hello(name):
+	return f"Hi, {name}"
+
+
+terminal : flask run
+
+export FLASK_APP=application.py/ set ...
+set FLASK_DEBUG=1
+
+
+
+session:
+When you log in to the web site, you have access to some session that is data specific to your user account.
+
+from flask import session
+from flask_session import Session
+
+
+
+CREATE INDEX
+
+SQL injection: solution is "escape particular characters"
+
+race condition
+
+SQLAlchemy
+
+
+
+
+
+
+
+
+----------------------------------------------------
+DEPLOYING 
+
+0,*Heroku(Need an account):
+a web-based platform that allows you to manage the deployment of web applications.
+
+
+Heroku’s free tier has limits:
+1,the number of apps you can deploy 
+2,how often people can visit your app
+...
+
+1,*Installing the Heroku Toolbelt(Tools which help deploy and manage a project on Heroku’s servers)
+https://toolbelt.heroku.com/
+
+2,*Installing Required Packages
+help serve Django projects on a live server
+
+active venv:
+pip install dj-database-url
+pip install dj-static
+pip install static3
+pip install gunicorn
+
+Tasks:
+1，helps Django communicate with the database Heroku uses
+(dj-database-url)
+2,help Django manage static files correctly(dj-static&static3)
+*Static files contain style rules and JavaScript files.
+3,a server capable of serving apps in a live environment.
+(gunicorn)
+
+3,*requirements.txt (a Packages List,our project depends on)
+active venv: pip freeze > requirements.txt
+
+The freeze command tells pip to write the names of all the packages currently installed in the project into the file requirements.txt.
+*add psycopg2>=2.6.1  (helps Heroku manage the live database)
+
+Psycopg is the most popular PostgreSQL adapter for the Python programming language
+
+
+4, *Specifying the Python Runtime
+
+python --version
+Make a new file:
+runtime.txt: python-3.5.0(current version)
+make sure you enter python in lowercase, followed by a hyphen, followed by the three-part version number.
+
+
+
+5,* Modifying settings.py for Heroku
+a, In a Heroku deployment, the directory is always /app
+b, import dj_database_url to help confgure the database on Heroku
+c, Heroku uses PostgreSQL (also called Postgres), a more advanced database than SQLite,these settings confgure the project to use Postgres on Heroku
+d, support HTTPS requests 
+e, ensure that Django will serve the project from Heroku’s URL
+f, set up the project to serve static files correctly on Heroku
+
+
+# Heroku settings
+if os.getcwd() == '/app':
+	import dj_database_url
+	DATABASES = {
+		'default': dj_database_url.config(default='postgres://localhost')
+	}
+	# Honor the 'X-Forwarded-Proto' header for request.is_secure().
+	SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+	# Allow all host headers.
+	ALLOWED_HOSTS = ['*']
+	# Static asset configuration
+	BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+	STATIC_ROOT = 'staticfiles'
+	STATICFILES_DIRS = (
+		os.path.join(BASE_DIR, 'static'),
+	)
+
+6,*Making a Procfile to Start Processes
+A Procfle tells Heroku which processes to start in order to serve the project properly. 
+Procfile: web: gunicorn learning_log.wsgi --log-file -
+( tells Heroku to use gunicorn as a server and to use the settings in learning_log/wsgi.py to launch the app. The log-file ﬂag tells Heroku the kinds of events to log.)
+
+7,*Modifying wsgi.py for Heroku
+Heroku needs a slightly different setup than what we’ve been using
+...
+from dj_static import Cling (which helps serve static files correctly, and use it to launch the application.)
+...
+application = Cling(get_wsgi_application())
+
+8, Making a Directory for Static Files
+On Heroku, Django collects all the static files and places them in one place so it can manage them effciently.
+Make a new folder:learning_log/learning_log/static/
+Make a placeholder file-placeholder.txt(empty directories won’t be included in the project when it’s pushed to Heroku)
+
+
+
+
+
+
+PUSHING to HEROKU
+
+When you’ve issued these commands, the project is deployed but not fully confgured.
+1,(active venv): heroku login (log in to Heroku)
+2, heroku create (build an empty project)
+3, git push heroku master (tells Git to push the master
+branch of the project to the repository Heroku just created)
+4, heroku ps (to check that the server process started correctly)
+5, heroku open(open the app in a browser)
+
+*Procfle:
+
+gmail:
+mangocutting@gmail.com
+github:
+matrixfire
+heroku:
+cutebo...@outlook.com
+
+349500371@qq.com
+postgresql: matrixfire

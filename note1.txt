@@ -1,0 +1,109 @@
+1, GIT --- version control
+Git is the most popular version control software in use today.
+Git implements version control by tracking the changes made to every file in a project.
+
+
+
+2, Installling Git
+Configuring git:
+git config --global user.name "username"
+git config --global user.email "username@example.com"
+
+
+3, Ignoring files (file: .gitignore)
+Files with the extension .pyc(stored in __pycache__) are automatically generated from .py fles, so we don’t need Git to keep track of them. 
+Using a .gitignore fle will keep your project clutter free and easier to work with.
+
+.gitignore __pycache__/
+
+4, Initializing a repository
+git init
+(All the information Git uses to track a repository is stored in the .git folder.)
+
+A repository is the set of files in a program that Git is actively tracking.
+代码仓库（repository）是Git等版本控制系统创建的一种数据结构，用来记录编程项目中所有的变动。数据结构（data structure）是一种组织和保存信息的方式。local repository，central repository
+ 
+All the files Git uses to manage the repository are located in the hidden directory .git/, which you won’t need to work with at all. Just don’t delete that directory, or you’ll lose your project’s history.
+
+ 5, Checking the status(git status)
+
+ In Git, a branch is a version of the project you’re working on;
+
+ A commit is a snapshot of the project at a particular point in time.Git保存的一个项目代码版本。
+
+ 6, Adding files to the repository
+
+ git add . :((use "git rm --cached <file>..." to unstage)
+ The command git add . adds all files within a project that are not
+already being tracked to the repository 
+
+The label new file means these files were newly added to the repository.
+
+7, making a Commit（Git保存的一个项目代码版本。）
+每次提交一个文件，Git就会保存项目代码。
+ git commit -m "message" :
+ take a snapshot of the project; The -m flag tells Git to record the message that follows in the project’s log;The -a ﬂag tells Git to add all modified files in the repository to the current commit. 
+提交文件，即命令Git 记录 本地代码仓库所做的修改
+-am,add all of the files that I've changed that I've already been tracking and commit them at the same time.
+
+ 8,Checking the log( git log --pretty=oneline)查看项目的提交历史
+ Each time you make a commit, Git generates a unique, 40-character reference ID. 
+  It records who made the commit, when it was made, and the message recorded. 
+
+use "git checkout -- <file>..." to discard changes in working directory
+
+
+*9, reverting a Change
+(git checkout .)
+The command git checkout allows you to work with any previous commit.
+The command git checkout . abandons any changes made since the last commit and restores the project to the last committed state.
+
+*checkout is the term that git uses for saying, I want to move where I currently am in the repository to somewhere else.
+
+You can check out any commit in your log, not just the most recent, by including the frst six characters of the reference ID instead of a dot. 
+When you check out a previous commit, you leave the master branch and enter what Git refers to as a detached HEAD state.
+HEAD is the current state of the project; （referring to where we currently are in the repository）we are detached because we’ve left a named branch(master, in this case).
+
+
+git reset --hard [commit]
+
+10, deleting the repository
+
+To delete the .git directory:
+rmdir /s .git	(linux:rm -rf .git)
+
+
+
+11, additional 
+
+git clone [url] :retrieve an entire repository from a hosted location via URL
+
+git diff: diff of what is changed but not staged
+可实现本地代码仓库与中央代码仓库之间文件的差别对比
+git diff --staged: diff of what is staged but not yet commited
+
+git branch: list your branches. a * will appear next to the currently active branch
+git branch [branch-name]: create a new branch at the current commit
+
+git merge [branch]: merge the specified branch’s history into the current one
+
+git push 将本地所做的修改更新至中央代码仓库
+git pull 将中央代码仓库的新修改同步到本地
+git push --set-upstream origin <new_branch>
+
+ git reset [文件路径] 可取消暂存
+
+
+推送修改到中央代码仓库共分3步:
+1，暂存（stage）文件，告诉Git希望将哪个修改过的文件推送到中央代码仓库
+2，提交文件，即命令Git记录本地代码仓库所做的修改
+3，将修改推送到Github上的中央代码仓库git push origin master
+
+
+git fetch + git merge origin/master
+
+git remote -v（-v是一个常用的旗标，用来打印详细信息）打印：本地代码仓库推送和拉取代码的目标URL链接
+
+
+
+Forks
