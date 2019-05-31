@@ -1,4 +1,5 @@
 1, GIT --- version control
+(Keep track of changes to code.Synchronizes code between different people.Test changes to code without losing the original.Revert back to old versions of code.)
 Git is the most popular version control software in use today.
 Git implements version control by tracking the changes made to every file in a project.
 
@@ -105,5 +106,8 @@ git fetch + git merge origin/master
 git remote -v（-v是一个常用的旗标，用来打印详细信息）打印：本地代码仓库推送和拉取代码的目标URL链接
 
 
+Merge Conflicts: HERE!!!
+
 
 Forks
+

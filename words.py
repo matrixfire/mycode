@@ -7,7 +7,11 @@ jieba.add_word(w) # 向分词词典增加新词
 '''
 
 excluded_symbols = '!"#$%&()*+,-./:;<=>?@[\\]^_‘{|}~'
-excluded_words = ['the'] 
+# excluded_words = ['the'] 
+with open(r'common_words.txt') as f_obj:
+	words_lines = f_obj.readlines()
+	excluded_words = [i.strip() for i in words_lines]
+
 
 path = r"test.txt"
 
@@ -18,8 +22,8 @@ def get_text_en(path):
 		txt = txt.replace(es, " ")
 	for num in range(10):
 		txt = txt.replace(str(num), ' ')
-	for word in excluded_words:
-		txt = txt.replace(word,' ')
+	# for word in excluded_words:
+	# 	txt = txt.replace(word,' ')
 	return txt	
 
 def get_word_freq(path):
@@ -27,7 +31,7 @@ def get_word_freq(path):
 	txt = get_text_en(path)
 	word_list = txt.split()
 	for word in word_list:
-		if len(word) > 2:
+		if len(word) > 2 and word not in excluded_words and "'" not in word:
 			word_dict[word] = word_dict.get(word, 0) + 1
 	final_list = list(word_dict.items())
 	final_list.sort(key=lambda x: x[1], reverse=True)		
@@ -37,11 +41,6 @@ def get_word_freq(path):
 # for i in get_word_freq(path):
 
 # 	print(i)		
-items = get_word_freq(path)
-
-for i in range(min(10, len(items))):
-	word, count = items[i]
-	print("{0:<10}{1:>5}".format(word, count))
 
 
 def get_chinese(path):
@@ -63,3 +62,19 @@ def get_chinese(path):
 	items.sort(key=lambda x:x[1], reverse=True)
 	return items
 
+def main():
+	items = get_word_freq(path)
+
+	for i in range(max(10, len(items))):
+		word, count = items[i]
+		print("{0:<10}{1:>5}".format(word, count))
+	# with open("words.txt", 'w') as f:
+	# 	for 
+	with open('w.txt', 'w') as f:
+		for w in items:
+			f.write(w[0] + '\n')
+
+
+
+if __name__ == '__main__':
+	main()
