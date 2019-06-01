@@ -6,6 +6,9 @@ Git is the most popular version control software in use today.
 You’ll have a local repository which lives inside a special folder named .git and you’ll normally (but not necessarily) have a remote, central repository where different collaborators may contribute their code. 
 Git implements version control by tracking the changes made to every file in a project.
 
+There are four fundamental elements in the Git Workflow.
+Working Directory, Staging Area(缓存区（Index）缓存区域，临时保存你的改动), Local Repository and Remote Repository.
+你的本地仓库由 git 维护的三棵“树”组成。第一个是你的 工作目录，它持有实际文件；第二个是 缓存区（Index），它像个缓存区域，临时保存你的改动；最后是 HEAD，指向你最近一次提交后的结果。
 
 
 2, Installling Git
@@ -55,6 +58,10 @@ The label new file means these files were newly added to the repository.
   It records who made the commit, when it was made, and the message recorded. 
 
 use "git checkout -- <file>..." to discard changes in working directory
+创建一个叫做“feature_x”的分支，并切换过去：
+git checkout -b feature_x
+把新建的分支删掉：
+git branch -d feature_x
 
 
 *9, reverting a Change
