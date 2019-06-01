@@ -1,6 +1,9 @@
 1, GIT --- version control
 (Keep track of changes to code.Synchronizes code between different people.Test changes to code without losing the original.Revert back to old versions of code.)
 Git is the most popular version control software in use today.
+( Git is distributed (unlike SVN or TFS for instance).)
+
+You’ll have a local repository which lives inside a special folder named .git and you’ll normally (but not necessarily) have a remote, central repository where different collaborators may contribute their code. 
 Git implements version control by tracking the changes made to every file in a project.
 
 
