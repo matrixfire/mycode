@@ -1,4 +1,6 @@
 import jieba
+
+# what the fuck
 '''
 jieba.lcut(s) # 精确模式，返回一个列表类型的分词结果
 jieba.lcut(s, cut_all=True) # 全模式
